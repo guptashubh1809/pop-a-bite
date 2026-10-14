@@ -2,6 +2,7 @@
 window.POPABITE = {
   whatsappNumber: '917889484101', // Country code + number, digits only; for example 91 followed by 10 digits.
   deliveryInformation: '',
+  
   products: [
     {id:'ladoo-one',name:'Haldi Ladoo',description:'A healthy choice for millet lovers.', priceLabel:'₹500', packSize:'500 grams',ingredients:'Cardamom, Black pepper, Almonds, Cashews, Makhana (Fox nuts), Coconut, Gond (Edible gum), Whole wheat flour, Jowar, Turmeric, Ghee, Organic jaggery',allergens:'Nuts, Dairy, Gluten',storage:'Store at room temperature away from direct sunlight. Shelf life: 3 months', image:'',paymentUrl:''},
 
