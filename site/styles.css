@@ -14,9 +14,9 @@
   /* Size settings: desktop first, then phones. */
   --headline-size: clamp(32px, 3.5vw, 48px);
   --headline-size-mobile: 42px;
-  --top-logo-width: 360px;
-  --bottom-logo-width: 300px;
-  --top-logo-width-mobile: 220px;
+  --top-logo-width: 300px;
+  --bottom-logo-width: 250px;
+  --top-logo-width-mobile: 240px;
   --bottom-logo-width-mobile: 150px;
 }
 
@@ -34,7 +34,7 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -44,17 +44,17 @@ a {
   text-decoration: none;
 }
 
-button,a,summary {
+button, a, summary {
   -webkit-tap-highlight-color: transparent;
 }
 
-a:focus-visible,button:focus-visible,summary:focus-visible {
+a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 3px solid #7659a3;
   outline-offset: 5px;
 }
 
 .wrap {
-  width: min(1180px,calc(100% - 80px));
+  width: min(1180px, calc(100% - 80px));
   margin: auto;
 }
 
@@ -85,7 +85,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 18px 0;
+  padding: 36px 0 24px;
 }
 
 .brand {
@@ -161,7 +161,7 @@ nav a:hover {
   color: var(--ink);
 }
 
-/* Opening section and decorative artwork */
+/* Opening section */
 .hero {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
@@ -177,8 +177,8 @@ nav a:hover {
   margin: 0 0 22px;
 }
 
-h1,h2 {
-  font-family: Georgia,'Times New Roman',serif;
+h1, h2 {
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: 400;
   letter-spacing: -.045em;
   line-height: 1.03;
@@ -186,7 +186,7 @@ h1,h2 {
 }
 
 h1 {
-  font-size: clamp(50px,5.5vw,78px);
+  font-size: clamp(50px, 5.5vw, 78px);
 }
 
 h1 em {
@@ -194,7 +194,7 @@ h1 em {
 }
 
 h2 {
-  font-size: clamp(32px,3.5vw,46px);
+  font-size: clamp(32px, 3.5vw, 46px);
 }
 
 .intro {
@@ -210,6 +210,15 @@ h2 {
   margin-top: 17px;
 }
 
+.hero-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  border-radius: 24px;
+}
+
+/* Legacy decorative artwork */
 .hero-art {
   height: 460px;
   background: var(--pink);
@@ -226,7 +235,7 @@ h2 {
   border-radius: 50%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .bite {
@@ -275,7 +284,7 @@ h2 {
   position: absolute;
   top: 170px;
   left: 50px;
-  font-family: Georgia,serif;
+  font-family: Georgia, serif;
   font-size: 48px;
   line-height: .98;
   letter-spacing: -2px;
@@ -349,7 +358,7 @@ h2 {
 
 .products {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
@@ -414,7 +423,7 @@ h2 {
 }
 
 .product h3 {
-  font-family: Georgia,serif;
+  font-family: Georgia, serif;
   font-size: 25px;
   font-weight: 400;
   margin: 17px 0 6px;
@@ -462,16 +471,31 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 90px;
+  align-items: center;
+  text-align: left;
+}
+
+/* Keep the heading at the left edge, midway down the story text. */
+.story-grid > div:first-child {
+  justify-self: start;
+}
+
+.story-grid h2 {
+  margin: 0;
 }
 
 .story-grid p:not(.eyebrow) {
   margin-top: 0;
   color: #e6dce1;
   font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 20px;
 }
 
 .story-signature {
-  font-family: Georgia,serif;
+  display: block;
+  margin-top: 24px;
+  font-family: Georgia, serif;
   font-style: italic;
   color: var(--pink);
   font-size: 24px;
@@ -541,7 +565,7 @@ footer {
   padding: 0 0 35px;
 }
 
-footer p,footer small {
+footer p, footer small {
   font-size: 11px;
   color: var(--muted);
 }
@@ -553,7 +577,7 @@ dialog {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 40px;
-  width: min(540px,calc(100% - 30px));
+  width: min(540px, calc(100% - 30px));
   max-height: 85vh;
   overflow: auto;
 }
@@ -607,7 +631,7 @@ dd {
 }
 
 [hidden] {
-  display: none!important;
+  display: none !important;
 }
 
 /* Logo images */
@@ -657,13 +681,26 @@ footer .brand img {
 }
 
 /* Tablets and smaller screens */
-@media (max-width:900px) {
+@media (max-width: 900px) {
   .wrap {
     width: calc(100% - 40px);
   }
 
   .header {
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 28px 0 20px;
+  }
+
+  .header nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    text-align: center;
   }
 
   nav {
@@ -732,11 +769,10 @@ footer .brand img {
   .ribbon {
     gap: 15px;
   }
-
 }
 
 /* Phones */
-@media (max-width:620px) {
+@media (max-width: 620px) {
   .brand {
     font-size: 24px;
   }
@@ -802,7 +838,7 @@ footer .brand img {
     height: 245px;
   }
 
-  .collection,.faq {
+  .collection, .faq {
     padding: 45px 0;
   }
 
@@ -853,35 +889,15 @@ footer .brand img {
   footer .brand img {
     width: var(--bottom-logo-width-mobile);
   }
-
 }
 
 /* Reduced motion */
-@media (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .button {
     transition: none;
-  }
-
-}
-
-/* Center the header on phones and tablets */
-@media (max-width: 900px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .header nav {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px 22px;
-    text-align: center;
   }
 }
