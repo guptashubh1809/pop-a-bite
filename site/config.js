@@ -1,10 +1,10 @@
 // Edit public business details here. Never put passwords or Razorpay secret keys in this file.
 //
-// PENDING before publishing (see the change plan):
-//  - Ingredient lists below follow the current wrap order. FSSAI requires descending order of
-//    weight, so re-sort each list once the recipe weights are known (plan section 8).
-//  - Confirm the dates in the Sund, and that no ingredient contains a preservative (plan section 11).
-//  - Add "Organic" back to jaggery only if the jaggery is certified organic.
+// Notes:
+//  - Ingredient lists are in descending order of batch weight, as FSSAI requires. Re-sort if a recipe changes.
+//  - The "No artificial colours, flavours or preservatives" claim on the site is true only while every
+//    supplier is confirmed to supply ingredients without additives (see the change plan, section 11).
+//  - Use the word "organic" for jaggery only if it is certified organic.
 window.POPABITE = {
   whatsappNumber: '917889484101', // Country code + number, digits only; for example 91 followed by 10 digits.
   deliveryInformation: '',
