@@ -901,3 +901,210 @@ footer .brand img {
     transition: none;
   }
 }
+
+/* What is not in our bites */
+.claims {
+  background: var(--green);
+  padding: 18px 20px;
+}
+
+.claims ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: min(1180px, 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.claims li {
+  padding: 0 24px;
+}
+
+.claims li + li {
+  border-left: 1px solid #452b3f40;
+}
+
+/* Product card price and protein */
+.product .product-meta {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 2px;
+}
+
+.product .product-protein {
+  font-size: 12px;
+  margin: 0 0 12px;
+}
+
+/* Nutrition table in the product pop-up */
+.nutri {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.nutri td {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.nutri td:last-child {
+  text-align: right;
+}
+
+.nutri-note {
+  font-size: 11px;
+  margin: 8px 0 0;
+}
+
+/* Order builder */
+.order {
+  padding: 10px 0 80px;
+}
+
+.order-body {
+  max-width: 640px;
+}
+
+.order-intro {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.order-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.order-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.order-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.order-sub {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  background: none;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.qty button:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.qty output {
+  min-width: 22px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.order-area-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+}
+
+.order-area {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+
+.order-summary {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 16px 0;
+}
+
+/* Sticky order button, phones only */
+.sticky-order {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .claims {
+    padding: 16px 20px;
+  }
+
+  .claims ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .claims li {
+    padding: 0;
+    text-align: center;
+  }
+
+  .claims li + li {
+    border-left: 0;
+  }
+
+  .order {
+    padding-bottom: 45px;
+  }
+
+  .sticky-order {
+    display: flex;
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 5;
+    box-shadow: 0 6px 20px #24142140;
+  }
+
+  body {
+    padding-bottom: 84px;
+  }
+}
+
+/* Keep the "Explore this bite" links level across cards of different heights */
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.product button {
+  margin-top: auto;
+}

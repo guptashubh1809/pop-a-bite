@@ -11,6 +11,11 @@ const dialogDetails = document.querySelector('#dialog-details');
 const dialogNote = document.querySelector('#dialog-note');
 const dialogPayment = document.querySelector('#dialog-payment');
 const dialogWhatsApp = document.querySelector('#dialog-whatsapp');
+const orderItems = document.querySelector('#order-items');
+const orderArea = document.querySelector('#order-area');
+const orderSummary = document.querySelector('#order-summary');
+const orderSend = document.querySelector('#order-send');
+const stickyOrder = document.querySelector('#sticky-order');
 
 // Allow payment links only from supported Razorpay domains.
 function safePaymentUrl(value) {
@@ -30,19 +35,24 @@ function safePaymentUrl(value) {
   }
 }
 
-// Create a WhatsApp link with a default message.
-function whatsappUrl(name) {
+// Create a WhatsApp link from any message.
+function whatsappLink(message) {
   const number = String(config.whatsappNumber || '').trim();
 
   if (!/^[1-9]\d{7,14}$/.test(number)) {
     return null;
   }
 
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+}
+
+// Create a WhatsApp link with a default message.
+function whatsappUrl(name) {
   const message = name
     ? `Hi Pop-A-Bite! I'd like to enquire about ${name}. Please confirm availability, price and delivery.`
     : "Hi Pop-A-Bite! I'd like to place an order. Please share availability, prices and delivery details.";
 
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  return whatsappLink(message);
 }
 
 // Show links only when a valid URL is available.
@@ -74,15 +84,43 @@ function showProduct(product) {
     ['Storage', product.storage]
   ];
 
+  // Only show rows that have content, so visitors never see placeholder text.
   details.forEach(([label, value]) => {
+    if (typeof value !== 'string' || !value.trim()) {
+      return;
+    }
+
     const term = document.createElement('dt');
     term.textContent = label;
 
     const definition = document.createElement('dd');
-    definition.textContent = value || 'To be confirmed before launch';
+    definition.textContent = value;
 
     dialogDetails.append(term, definition);
   });
+
+  // Nutrition table, shown only when a lab report exists for the product.
+  if (Array.isArray(product.nutrition) && product.nutrition.length) {
+    const term = document.createElement('dt');
+    term.textContent = 'Nutrition per 100 g';
+
+    const definition = document.createElement('dd');
+    const table = document.createElement('table');
+    table.className = 'nutri';
+
+    product.nutrition.forEach(([label, value]) => {
+      const row = table.insertRow();
+      row.insertCell().textContent = label;
+      row.insertCell().textContent = value;
+    });
+
+    const note = document.createElement('p');
+    note.className = 'nutri-note';
+    note.textContent = 'Values marked < are below lab quantification limits.';
+
+    definition.append(table, note);
+    dialogDetails.append(term, definition);
+  }
 
   const complete = [
     ...details.map(([, value]) => value),
@@ -134,15 +172,135 @@ config.products.forEach(product => {
   const description = document.createElement('p');
   description.textContent = product.description;
 
+  const meta = document.createElement('p');
+  meta.className = 'product-meta';
+  meta.textContent = `${product.priceLabel} for ${product.packSize}`;
+
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = 'Explore this bite ↗';
   button.setAttribute('aria-label', `Explore ${product.name}`);
   button.addEventListener('click', () => showProduct(product));
 
-  article.append(art, heading, description, button);
+  article.append(art, heading, description, meta);
+
+  if (product.highlight) {
+    const highlight = document.createElement('p');
+    highlight.className = 'product-protein';
+    highlight.textContent = product.highlight;
+    article.append(highlight);
+  }
+
+  article.append(button);
   products.append(article);
 });
+
+// Order builder: choose quantities, then open a ready-made WhatsApp message.
+const quantities = new Map();
+
+function formatRupees(amount) {
+  return `₹${amount.toLocaleString('en-IN')}`;
+}
+
+function buildOrderMessage() {
+  const lines = [];
+  let total = 0;
+
+  config.products.forEach(product => {
+    const quantity = quantities.get(product.id) || 0;
+
+    if (quantity > 0) {
+      lines.push(`- ${product.name} (${product.packSize}) x ${quantity}`);
+      total += quantity * product.price;
+    }
+  });
+
+  if (!lines.length) {
+    return null;
+  }
+
+  const area = orderArea.value.trim();
+
+  return [
+    "Hi Pop-A-Bite! I'd like to order:",
+    ...lines,
+    `Product total: ${formatRupees(total)} (delivery charges extra)`,
+    area
+      ? `Delivery area or PIN code: ${area}`
+      : "I'll share my delivery location here.",
+    'Please confirm availability, delivery charge and the total.'
+  ].join('\n');
+}
+
+function updateOrder() {
+  const message = buildOrderMessage();
+  const link = message ? whatsappLink(message) : null;
+
+  if (message) {
+    const total = config.products.reduce(
+      (sum, product) => sum + (quantities.get(product.id) || 0) * product.price,
+      0
+    );
+    orderSummary.textContent = `Product total ${formatRupees(total)}. Delivery charges are extra and we will confirm them before you pay.`;
+  } else {
+    orderSummary.textContent = 'Choose at least one treat to build your order message.';
+  }
+
+  setLink(orderSend, link);
+}
+
+config.products.forEach(product => {
+  quantities.set(product.id, 0);
+
+  const row = document.createElement('div');
+  row.className = 'order-row';
+
+  const info = document.createElement('div');
+
+  const name = document.createElement('div');
+  name.className = 'order-name';
+  name.textContent = product.name;
+
+  const sub = document.createElement('div');
+  sub.className = 'order-sub';
+  sub.textContent = `${product.priceLabel} for ${product.packSize}`;
+
+  info.append(name, sub);
+
+  const controls = document.createElement('div');
+  controls.className = 'qty';
+
+  const minus = document.createElement('button');
+  minus.type = 'button';
+  minus.textContent = '−';
+  minus.setAttribute('aria-label', `Remove one ${product.name}`);
+
+  const output = document.createElement('output');
+  output.textContent = '0';
+  output.setAttribute('aria-label', `${product.name} quantity`);
+
+  const plus = document.createElement('button');
+  plus.type = 'button';
+  plus.textContent = '+';
+  plus.setAttribute('aria-label', `Add one ${product.name}`);
+
+  function change(step) {
+    const next = Math.min(20, Math.max(0, (quantities.get(product.id) || 0) + step));
+    quantities.set(product.id, next);
+    output.textContent = String(next);
+    updateOrder();
+  }
+
+  minus.addEventListener('click', () => change(-1));
+  plus.addEventListener('click', () => change(1));
+
+  controls.append(minus, output, plus);
+  row.append(info, controls);
+  orderItems.append(row);
+});
+
+orderArea.addEventListener('input', updateOrder);
+updateOrder();
 
 // Close the product details window.
 document.querySelector('.close').addEventListener('click', () => {
@@ -152,14 +310,15 @@ document.querySelector('.close').addEventListener('click', () => {
 // Keep the copyright year current.
 document.querySelector('#year').textContent = new Date().getFullYear();
 
-// Set the bottom contact button using the number in config.js.
+// Set the bottom contact button and the mobile order button using the number in config.js.
 const contact = whatsappUrl();
 
 if (contact) {
   const link = document.querySelector('#contact-link');
   link.textContent = 'Order on WhatsApp ↗';
   setLink(link, contact);
-
 }
+
+setLink(stickyOrder, contact);
 
 // FAQ answers remain in index.html. Edit their wording there.

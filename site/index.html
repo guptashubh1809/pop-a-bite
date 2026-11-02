@@ -1,12 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta name="google-site-verification" content="k-4B6JT2st69akNHsy2ffUnovcfOFXYoh8kctZQ_tPk" />
+  <meta name="google-site-verification" content="k-4B6JT2st69akNHsy2ffUnovcfOFXYoh8kctZQ_tPk" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Meet Pop-A-Bite: sweet snacks, ladoos and Jammu Sund. Discover our first collection.">
+  <meta name="description" content="Meet Pop-A-Bite: homemade ladoos and Jammu Sund made with nuts, cow ghee and jaggery. No palm oil, no refined oil, no corn syrup.">
   <meta name="theme-color" content="#452b3f">
   <title>Pop-A-Bite | Homemade Ladoos &amp; Sund in Jammu</title>
+
+  <!-- Link previews (WhatsApp, Facebook, X). Keep images/hero.png under about 300 KB for fast previews. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pop-A-Bite">
+  <meta property="og:title" content="Pop-A-Bite | Homemade Ladoos &amp; Sund in Jammu">
+  <meta property="og:description" content="Homemade ladoos and Jammu Sund made with nuts, cow ghee and jaggery. No palm oil, no refined oil, no corn syrup.">
+  <meta property="og:url" content="https://pop-a-bite.netlify.app/">
+  <meta property="og:image" content="https://pop-a-bite.netlify.app/images/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="styles.css">
   <script defer src="config.js"></script>
   <script defer src="app.js"></script>
@@ -22,6 +32,7 @@
 
     <nav aria-label="Main navigation">
       <a href="#collection">Our bites</a>
+      <a href="#order">Build your order</a>
       <a href="#story">Our story</a>
       <a href="#questions">Good to know</a>
     </nav>
@@ -34,9 +45,9 @@
          <h1>A little taste<br>of <em>home</em></h1>
 
         <p class="intro">
-          Pop-A-Bite proudly presents you with a taste of Jammu's
-          Sund and two kinds of protein packed, low sugar homemade
-          ladoos. Adding healthy sweetness to your everyday!
+          Pop-A-Bite brings you Jammu's Sund and two homemade ladoos,
+          made with nuts, cow ghee and jaggery. No palm oil,
+          no refined oil, no corn syrup.
         </p>
 
         <div class="hero-actions">
@@ -65,7 +76,16 @@
 >
     </section>
 
-    <div class="ribbon" aria-hidden="true"></div>
+    <!-- What is not in our bites. Keep every line true for every batch (see change plan section 11). -->
+    <section class="claims" aria-label="What is not in our bites">
+      <ul>
+        <li>No palm oil</li>
+        <li>No refined oil</li>
+        <li>No maida</li>
+        <li>No corn syrup</li>
+        <li>No artificial colours, flavours or preservatives</li>
+      </ul>
+    </section>
 
     <!-- Product collection: app.js fills the products container -->
     <section class="collection wrap" id="collection">
@@ -81,6 +101,34 @@
       </noscript>
     </section>
 
+    <!-- Order builder: app.js fills the items and builds the WhatsApp message -->
+    <section class="order wrap" id="order">
+      <div class="section-title">
+        <div>
+          <h2>Build your order.</h2>
+        </div>
+      </div>
+
+      <div class="order-body">
+        <p class="order-intro">
+          Choose what you’d like and we’ll open a ready-to-send WhatsApp message.
+          We confirm availability, delivery charge and your total before you pay.
+        </p>
+
+        <div id="order-items" class="order-items"></div>
+
+        <label class="order-area-label" for="order-area">Delivery area or PIN code (Jammu only)</label>
+        <input id="order-area" class="order-area" type="text" autocomplete="postal-code" placeholder="For example, Trikuta Nagar or 180012">
+
+        <p id="order-summary" class="order-summary" aria-live="polite"></p>
+        <a id="order-send" class="button" hidden>Send order on WhatsApp ↗</a>
+
+        <noscript>
+          <p>Enable JavaScript to build your order here, or message us on WhatsApp at +91 78894 84101.</p>
+        </noscript>
+      </div>
+    </section>
+
     <!-- Our story -->
     <section class="story" id="story">
       <div class="wrap story-grid">
@@ -89,17 +137,22 @@
         </div>
         <div>
           <p>
-
-	At Pop-A-Bite, we believe that the joy of eating can remain guilt-free. Our aim is 	simple: to bring you the comfort of homemade food and the pleasure of sweet bites, 	without compromising on your health and fitness.
-	</p>
-
-	<p>
-
-	We believe sweetness can be both delicious and wholesome. With quality ingredients, 	millets in selected recipes and no artificial sweeteners, we create homemade treats with 	your health in mind. We want you to enjoy the sweetness you love while feeling good about 	what goes into every bite.
-	</p>
-	<p>
-
-	As Pop-A-Bite grows, our commitment remains the same: to keep homemade care, thoughtfully 	chosen ingredients and healthier sweetness at the heart of everything we make.</p>
+            At Pop-A-Bite, we believe that the joy of eating can remain guilt-free.
+            Our aim is simple: to bring you the comfort of homemade food and the
+            pleasure of sweet bites, made with ingredients you can read on the label.
+          </p>
+          <p>
+            We believe sweetness can be both delicious and honest. We make our
+            treats with nuts, cow ghee and jaggery, with whole wheat and chana
+            in selected recipes. There is no palm oil, no refined oil and no
+            artificial colours, flavours or preservatives, so you can see exactly
+            what goes into every bite.
+          </p>
+          <p>
+            As Pop-A-Bite grows, our commitment remains the same: to keep homemade
+            care, thoughtfully chosen ingredients and honest sweetness at the heart
+            of everything we make.
+          </p>
           <p>We are excited to see where Pop-A-Bite takes us next!</p>
           <span class="story-signature">Here's to a poppin' bite!</span>
         </div>
@@ -114,19 +167,18 @@
       <details>
         <summary>What is Sund?</summary>
         <p>
-          Sund is a traditional sweet speciality from Jammu, known for its rich
-          blend of dry fruits. Traditionally prepared by roasting nuts and dried
-          fruits in ghee, it is especially popular during the winter months.
+          Sund is a sweet speciality from Jammu, made with a rich blend of dry
+          fruits roasted in ghee and popular in the winter months.
         </p>
       </details>
 
       <details>
         <summary>How do I order?</summary>
         <p id="ordering-answer">
-          Ordering is simple! Message or call us on WhatsApp. Let us know which
-          treats you’d like, the quantity and your delivery location. We’ll
-          confirm availability, delivery details and the total price before you
-          confirm your order.
+          Ordering is simple! Use the order builder above, or message or call us
+          on WhatsApp. Let us know which treats you’d like, the quantity and your
+          delivery location. We’ll confirm availability, delivery details and the
+          total price before you confirm your order. Payment is by UPI QR code.
         </p>
       </details>
 
@@ -144,9 +196,9 @@
       <details>
         <summary>Where can I find ingredients and allergen details?</summary>
         <p>
-          Each product has its own ingredient list, allergen information and
-          storage guidance. Please click “Explore this bite” under the product
-          to check these details.
+          Each product has its own ingredient list, allergen information,
+          storage guidance and, for the ladoos, a nutrition table per 100 g.
+          Please click “Explore this bite” under the product to check these details.
         </p>
       </details>
     </section>
@@ -178,8 +230,11 @@
       <img class="brand-logo" src="images/logo.png" alt="Pop-A-Bite">
     </a>
     <p>Little bites. Big possibilities.</p>
-    <small>© <span id="year"></span> Pop-A-Bite</small>
+    <small>© <span id="year"></span> Pop-A-Bite · FSSAI Reg. No. 21026153000396</small>
   </footer>
+
+  <!-- Sticky order button, shown on phones only (see styles.css) -->
+  <a id="sticky-order" class="sticky-order button" hidden>Order on WhatsApp ↗</a>
 
   <!-- Product details: keep these IDs because app.js uses them -->
   <dialog id="product-dialog" aria-labelledby="dialog-title">
