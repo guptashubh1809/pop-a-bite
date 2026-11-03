@@ -12,7 +12,7 @@ window.POPABITE = {
   // Kitchen status shown under the opening headline. Set kitchenOpen to false when Maa is fully booked,
   // and change kitchenStatus to something like 'Kitchen full this week. Back on 15 Nov'.
   kitchenOpen: true,
-  kitchenStatus: 'Kitchen open · Freshly prepared for every order',
+  kitchenStatus: 'Kitchen open · freshly prepared for every order',
 
   // Pickup: the area name only, for example 'Gandhi Nagar'. Never the full home address;
   // the exact location is shared on WhatsApp after the order is confirmed.
