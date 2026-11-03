@@ -197,6 +197,7 @@ config.products.forEach(product => {
 
 // Order builder: choose quantities, then open a ready-made WhatsApp message.
 const quantities = new Map();
+const quantityChangers = new Map();
 
 function formatRupees(amount) {
   return `₹${amount.toLocaleString('en-IN')}`;
@@ -291,6 +292,7 @@ config.products.forEach(product => {
     updateOrder();
   }
 
+  quantityChangers.set(product.id, change);
   minus.addEventListener('click', () => change(-1));
   plus.addEventListener('click', () => change(1));
 
@@ -320,5 +322,78 @@ if (contact) {
 }
 
 setLink(stickyOrder, contact);
+
+// Share button: opens WhatsApp so visitors can forward the site to family.
+setLink(
+  document.querySelector('#share-link'),
+  `https://wa.me/?text=${encodeURIComponent(
+    'Found these homemade ladoos from Jammu, hand-rolled by a mom with desi ghee and jaggery: https://pop-a-bite.netlify.app/'
+  )}`
+);
+
+// Kitchen status under the opening headline, set in config.js.
+const kitchenStatus = document.querySelector('#kitchen-status');
+
+if (typeof config.kitchenStatus === 'string' && config.kitchenStatus.trim()) {
+  kitchenStatus.textContent = config.kitchenStatus;
+  kitchenStatus.classList.toggle('closed', config.kitchenOpen === false);
+  kitchenStatus.hidden = false;
+}
+
+// Bite chooser: suggest a product for a moment, then add it to the order builder.
+const pickSuggestions = {
+  'ladoo-one': 'Try the Haldi Ladoo. Whole wheat, haldi and nuts roasted in ghee, made for a cup of chai.',
+  'ladoo-two': 'Try the Sattu Ladoo. Roasted chana, makhana and nuts, with 11.6 g protein per 100 g.',
+  sund: 'Try Jammu Sund. Dry fruits roasted in ghee, the way Jammu homes make it every winter.',
+  all: 'Get one of each: Haldi Ladoo, Sattu Ladoo and Jammu Sund.'
+};
+const pickResult = document.querySelector('#pick-result');
+const pickText = document.querySelector('#pick-text');
+const pickAdd = document.querySelector('#pick-add');
+let pickChoice = null;
+
+document.querySelectorAll('[data-pick]').forEach(button => {
+  button.addEventListener('click', () => {
+    pickChoice = button.dataset.pick;
+    document.querySelectorAll('[data-pick]').forEach(other => {
+      other.setAttribute('aria-pressed', String(other === button));
+    });
+    pickText.textContent = pickSuggestions[pickChoice];
+    pickAdd.textContent = 'Add to my order';
+    pickResult.hidden = false;
+  });
+});
+
+pickAdd.addEventListener('click', () => {
+  const ids = pickChoice === 'all' ? config.products.map(product => product.id) : [pickChoice];
+  ids.forEach(id => quantityChangers.get(id)?.(1));
+  pickAdd.textContent = 'Added ✓';
+  document.querySelector('#order').scrollIntoView();
+});
+
+// Customer reviews, shown only when config.js has at least one.
+const reviews = Array.isArray(config.reviews)
+  ? config.reviews.filter(review => review && typeof review.quote === 'string' && review.quote.trim())
+  : [];
+
+if (reviews.length) {
+  const list = document.querySelector('#review-list');
+
+  reviews.forEach(review => {
+    const figure = document.createElement('figure');
+    figure.className = 'review';
+
+    const quote = document.createElement('blockquote');
+    quote.textContent = `“${review.quote.trim()}”`;
+
+    const caption = document.createElement('figcaption');
+    caption.textContent = [review.name, review.place].filter(Boolean).join(', ');
+
+    figure.append(quote, caption);
+    list.append(figure);
+  });
+
+  document.querySelector('#reviews').hidden = false;
+}
 
 // FAQ answers remain in index.html. Edit their wording there.

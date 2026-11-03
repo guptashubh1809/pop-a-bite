@@ -4,17 +4,17 @@
   <meta name="google-site-verification" content="k-4B6JT2st69akNHsy2ffUnovcfOFXYoh8kctZQ_tPk" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Meet Pop-A-Bite: homemade ladoos and Jammu Sund made with nuts, cow ghee and jaggery. No palm oil, no refined oil, no refined sugar.">
+  <meta name="description" content="Homemade ladoos and Jammu Sund, hand-rolled by Maa only after you order. Desi cow ghee, jaggery and real dry fruits. No palm oil, no refined oil, no refined sugar.">
   <meta name="theme-color" content="#582408">
   <title>Pop-A-Bite | Homemade Ladoos &amp; Sund in Jammu</title>
 
-  <!-- Link previews (WhatsApp, Facebook, X). Keep images/hero.png under about 300 KB for fast previews. -->
+  <!-- Link previews (WhatsApp, Facebook, X). Keep images/hero.jpg under about 300 KB for fast previews. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pop-A-Bite">
-  <meta property="og:title" content="Pop-A-Bite | Homemade Ladoos &amp; Sund in Jammu">
-  <meta property="og:description" content="Homemade ladoos and Jammu Sund made with nuts, cow ghee and jaggery. No palm oil, no refined oil, no refined sugar.">
+  <meta property="og:title" content="Your mom's ladoos. Rolled by ours. | Pop-A-Bite">
+  <meta property="og:description" content="Hand-rolled at home in Jammu, only after you order. Desi cow ghee, jaggery and real dry fruits. No palm oil, no refined sugar.">
   <meta property="og:url" content="https://pop-a-bite.netlify.app/">
-  <meta property="og:image" content="https://pop-a-bite.netlify.app/images/hero.png">
+  <meta property="og:image" content="https://pop-a-bite.netlify.app/images/hero.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="stylesheet" href="styles.css">
@@ -32,6 +32,7 @@
 
     <nav aria-label="Main navigation">
       <a href="#collection">Our bites</a>
+      <a href="#made">How it's made</a>
       <a href="#order">Build your order</a>
       <a href="#story">Our story</a>
       <a href="#questions">Good to know</a>
@@ -42,12 +43,15 @@
     <!-- Opening section -->
     <section class="hero wrap">
       <div class="hero-copy">
-         <h1>A little taste<br>of <em>home</em></h1>
+        <!-- app.js fills this from kitchenOpen and kitchenStatus in config.js -->
+        <p id="kitchen-status" class="kitchen-status" hidden></p>
+
+        <h1>Your mom's ladoos.<br>Rolled by <em>ours.</em></h1>
 
         <p class="intro">
-          Pop-A-Bite brings you Jammu's Sund and two homemade ladoos,
-          made with nuts, cow ghee and jaggery. No palm oil,
-          no refined oil, no refined sugar.
+          Hand-rolled at home in Jammu, only after you order.
+          Desi cow ghee, jaggery and real dry fruits. No palm oil,
+          no refined sugar, nothing you can't read on the label.
         </p>
 
         <div class="hero-actions">
@@ -63,17 +67,19 @@
         </div>
 
         <p class="footnote">
-          Jammu delivery only · Delivery charges extra.
-          We’ll confirm your total on WhatsApp before you order.
+          Jammu delivery only · Made to order, so it takes a few days.
+          We confirm your date and total on WhatsApp.
         </p>
       </div>
 
-     <img
-  class="hero-photo"
-  src="images/hero.png"
-  alt="Sattu and Haldi ladoos on separate plates, alongside a bowl of Sund"
-  fetchpriority="high"
->
+      <img
+        class="hero-photo"
+        src="images/hero.jpg"
+        alt="Sattu and Haldi ladoos on separate plates, alongside a bowl of Sund"
+        width="1100"
+        height="1100"
+        fetchpriority="high"
+      >
     </section>
 
     <!-- What is not in our bites. Keep every line true for every batch (see change plan section 11). -->
@@ -85,6 +91,41 @@
         <li>No maida</li>
         <li>No artificial colours, flavours or preservatives</li>
       </ul>
+    </section>
+
+    <!-- How an order is made. Keep these steps true to how Maa actually works. -->
+    <section class="made wrap" id="made">
+      <p class="eyebrow">MADE TO ORDER</p>
+      <div class="section-title">
+        <h2>Your ladoos don't exist yet.</h2>
+        <p>
+          Nothing sits ready-made on a shelf. Every box is made after your order comes in,
+          which is why it takes a few days and why it tastes like it came from home.
+        </p>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <h3>You order</h3>
+          <p>Tell us on WhatsApp what you'd like. We confirm your delivery date and total.</p>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <h3>Small-batch ingredients</h3>
+          <p>Ghee, jaggery and dry fruits are bought in small quantities, never in bulk, so nothing sits around getting old.</p>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <h3>Roasted and rolled by hand</h3>
+          <p>Flour roasted slowly in ghee, jaggery melted in, and every ladoo rolled by hand.</p>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <h3>At your door</h3>
+          <p>Packed once it's ready and delivered anywhere in Jammu.</p>
+        </li>
+      </ol>
     </section>
 
     <!-- Product collection: app.js fills the products container -->
@@ -101,6 +142,113 @@
       </noscript>
     </section>
 
+    <!-- Sund: Jammu heritage. Keep each line to what's documented (Wikipedia "Panjiri"; Daily Excelsior, "Ceremonies of Dogra Hindus", 2022). -->
+    <section class="sund-story wrap" id="sund">
+      <p class="eyebrow">FROM DOGRA KITCHENS</p>
+      <div class="section-title">
+        <h2>Sund. Jammu's own winter sweet.</h2>
+        <p>
+          Sund takes its name from the Dogri word for dry ginger. It's Jammu's own
+          take on panjiri: dry fruits, gond and dry ginger, roasted slowly in desi ghee.
+        </p>
+      </div>
+
+      <ul class="sund-moments">
+        <li>
+          <span class="sund-label">On Janmashtami</span>
+          <p>At midnight on Thogren da Bart, Dogra homes offer Sund to Krishna, then share it as prasad the next morning.</p>
+        </li>
+        <li>
+          <span class="sund-label">Before a baby arrives</span>
+          <p>In Dogra families, a mother-to-be's own family sends her Sund in the last months before her baby is born.</p>
+        </li>
+        <li>
+          <span class="sund-label">All winter long</span>
+          <p>When the cold sets in, Jammu kitchens start roasting Sund for the winter months.</p>
+        </li>
+      </ul>
+
+      <p class="sund-close">
+        We grew up with it. Maa makes ours the way it's made at home in Jammu,
+        sweetened with jaggery, and now she makes it for your home too.
+        <a href="#order">Add Sund to your order →</a>
+      </p>
+    </section>
+
+    <!-- The swap: what we use instead. Describe ingredients by tradition and taste, never by medical benefit. -->
+    <section class="swap" id="inside">
+      <div class="wrap">
+        <p class="eyebrow">WHAT GOES IN</p>
+        <div class="section-title">
+          <h2>The same things Maa always used.</h2>
+          <p>Most packaged sweets swap the good stuff for something cheaper. We swap it back.</p>
+        </div>
+
+        <ul class="swap-list">
+          <li>
+            <s>Refined sugar or corn syrup</s>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <div>
+              <h3>Jaggery</h3>
+              <p>Sugarcane juice, simply boiled down. It gives ladoos the deep, caramel taste they have always had in Indian homes.</p>
+            </div>
+          </li>
+          <li>
+            <s>Palm oil, vanaspati or seed oils</s>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <div>
+              <h3>Desi cow ghee</h3>
+              <p>Flour and dry fruits are roasted slowly in ghee, and ghee is what holds every ladoo together.</p>
+            </div>
+          </li>
+          <li>
+            <s>Maida</s>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <div>
+              <h3>Whole wheat and chana sattu</h3>
+              <p>Sattu is roasted chana flour, an everyday staple in many Indian kitchens. It's why our Sattu Ladoo has 11.6 g protein per 100 g.</p>
+            </div>
+          </li>
+          <li>
+            <s>Artificial colour and flavour</s>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <div>
+              <h3>Real nuts and whole spices</h3>
+              <p>Almonds, cashews, makhana and coconut you can see in every bite, with cardamom and black pepper for flavour.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="pantry">
+          <h3>And from the winter pantry</h3>
+          <dl>
+            <div><dt>Haldi</dt><dd>Turmeric, added to winter foods in Indian kitchens for generations. It gives the Haldi Ladoo its colour.</dd></div>
+            <div><dt>Gond</dt><dd>Edible gum, a classic in North Indian winter ladoos and panjiri. Roasted in ghee for a light crunch.</dd></div>
+            <div><dt>Makhana</dt><dd>Fox nuts, roasted until crisp.</dd></div>
+            <div><dt>Dry ginger</dt><dd>A warming spice from old winter recipes, ground into our Jammu Sund.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bite chooser: app.js shows a suggestion and can add it to the order builder -->
+    <section class="pick wrap" id="pick" aria-labelledby="pick-title">
+      <p class="eyebrow">NOT SURE WHERE TO START?</p>
+      <h2 id="pick-title">When do you reach for something sweet?</h2>
+
+      <div class="pick-options" role="group" aria-label="Choose a moment">
+        <button type="button" data-pick="ladoo-one">With evening chai</button>
+        <button type="button" data-pick="ladoo-two">After a walk or workout</button>
+        <button type="button" data-pick="sund">On a cold winter evening</button>
+        <button type="button" data-pick="all">I can't pick just one</button>
+      </div>
+
+      <div id="pick-result" class="pick-result" aria-live="polite" hidden>
+        <p id="pick-text"></p>
+        <button id="pick-add" class="button" type="button">Add to my order</button>
+      </div>
+    </section>
+
     <!-- Order builder: app.js fills the items and builds the WhatsApp message -->
     <section class="order wrap" id="order">
       <div class="section-title">
@@ -112,7 +260,7 @@
       <div class="order-body">
         <p class="order-intro">
           Choose what you’d like and we’ll open a ready-to-send WhatsApp message.
-          We confirm availability, delivery charge and your total before you pay.
+          We confirm availability, your delivery date, delivery charge and total before you pay.
         </p>
 
         <div id="order-items" class="order-items"></div>
@@ -129,31 +277,38 @@
       </div>
     </section>
 
+    <!-- Customer reviews: hidden until reviews are added in config.js -->
+    <section class="reviews wrap" id="reviews" hidden>
+      <p class="eyebrow">FROM OUR FAMILIES</p>
+      <h2>What people say after the first bite.</h2>
+      <div id="review-list" class="review-list"></div>
+    </section>
+
     <!-- Our story -->
     <section class="story" id="story">
       <div class="wrap story-grid">
         <div>
-          <h2>Our Story.</h2>
+          <h2>Why we started.</h2>
         </div>
         <div>
           <p>
-            At Pop-A-Bite, we believe that the joy of eating can remain guilt-free.
-            Our aim is simple: to bring you the comfort of homemade food and the
-            pleasure of sweet bites, made with ingredients you can read on the label.
+            In most Indian homes, ladoos were never bought. Maa made them.
+            She roasted the flour in ghee, melted the jaggery and rolled each one
+            by hand, with a jar kept aside for the kids and another for the grandparents.
           </p>
           <p>
-            We believe sweetness can be both delicious and honest. We make our
-            treats with nuts, cow ghee and jaggery, with whole wheat and chana
-            in selected recipes. There is no palm oil, no refined oil, no refined
-            sugar and no artificial colours, flavours or preservatives, so you can
-            see exactly what goes into every bite.
+            Life got busier. Fewer homes have the hours it takes, and what's on
+            the shelf is often made with palm oil, refined sugar and flavourings.
           </p>
           <p>
-            As Pop-A-Bite grows, our commitment remains the same: to keep homemade
-            care, thoughtfully chosen ingredients and honest sweetness at the heart
-            of everything we make.
+            So our Maa makes them for you, in our home kitchen in Jammu, the way
+            she always has. She buys ingredients in small batches, never in bulk,
+            starts cooking when your order comes in, and rolls every ladoo by hand.
           </p>
-          <p>We are excited to see where Pop-A-Bite takes us next!</p>
+          <p>
+            That's all Pop-A-Bite is: the ladoos you grew up with, for every
+            home that misses them.
+          </p>
           <span class="story-signature">Here's to a poppin' bite!</span>
         </div>
       </div>
@@ -165,10 +320,80 @@
       <h2>A few things before your first bite.</h2>
 
       <details>
+        <summary>Is it really made at home?</summary>
+        <p>
+          Yes. Every batch is made by Maa in our home kitchen in Jammu, and every
+          ladoo is rolled by hand. Pop-A-Bite is registered with FSSAI
+          (Reg. No. 21026153000396).
+        </p>
+      </details>
+
+      <details>
+        <summary>Why does my order take a few days?</summary>
+        <p>
+          Because we start only when you order. Maa gets in whatever
+          ingredients the order needs, then roasts and rolls everything by hand.
+          How long it takes depends on how much you order and how many orders
+          are ahead of yours. We'll tell you the exact date on WhatsApp before
+          you pay.
+        </p>
+      </details>
+
+      <details>
+        <summary>How do you buy your ingredients?</summary>
+        <p>
+          We buy ghee, jaggery and dry fruits in small quantities and never stock
+          up in bulk, so nothing is kept long enough to go stale. For a small order,
+          Maa may use dry fruits from a recent batch; for bigger orders she buys
+          new ones.
+        </p>
+      </details>
+
+      <details>
         <summary>What is Sund?</summary>
         <p>
-          Sund is a sweet speciality from Jammu, made with a rich blend of dry
-          fruits roasted in ghee and popular in the winter months.
+          Sund is Jammu's own version of panjiri, named after sund, the Dogri word
+          for dry ginger. Dry fruits, gond and dry ginger are roasted slowly in desi
+          ghee. Dogra families make it through the winter, offer it to Krishna on
+          Janmashtami, and send it to a daughter when she is expecting. Eat a spoonful
+          as it is, or with a glass of warm milk.
+        </p>
+      </details>
+
+      <details>
+        <summary>What is sattu?</summary>
+        <p>
+          Sattu is roasted chana (Bengal gram) ground into flour. It has been an
+          everyday food in Bihar for generations, stirred into drinks, stuffed into
+          parathas and rolled into ladoos, because it's filling and needs no more
+          cooking. Our Sattu Ladoo has 11.6 g protein per 100 g, tested in a lab.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why put haldi in a ladoo?</summary>
+        <p>
+          Our Haldi Ladoo comes from the family of North Indian winter ladoos, like
+          pinni and gond ladoo: whole wheat and gond roasted in ghee, sweetened with
+          jaggery. Maa adds haldi, the same spice that goes into haldi doodh on cold
+          nights. It gives the ladoo its golden colour and a gentle, earthy warmth.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why jaggery and not sugar?</summary>
+        <p>
+          It's what ladoos were always made with at home. Jaggery is sugarcane juice
+          boiled down, without the refining that white sugar goes through, and it
+          gives a deeper, caramel taste. We never use refined sugar or corn syrup.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why ghee and not oil?</summary>
+        <p>
+          Ghee is how ladoos have always been roasted and bound. We use desi cow ghee
+          only, and never palm oil, vanaspati or refined oils.
         </p>
       </details>
 
@@ -194,6 +419,22 @@
       </details>
 
       <details>
+        <summary>Can I order for my family in Jammu?</summary>
+        <p>
+          Yes. Wherever you live, you can order for parents, grandparents or
+          friends in Jammu. Share their address on WhatsApp and we'll deliver
+          to them.
+        </p>
+      </details>
+
+      <details>
+        <summary>How long do they keep?</summary>
+        <p>
+          Up to 3 months. Store them at room temperature, away from direct sunlight.
+        </p>
+      </details>
+
+      <details>
         <summary>Where can I find ingredients and allergen details?</summary>
         <p>
           Each product has its own ingredient list, allergen information,
@@ -209,7 +450,7 @@
         <p class="eyebrow">LET'S TALK BITES</p>
         <h2>Your next sweet moment<br>starts here.</h2>
       </div>
-      <div>
+      <div class="contact-actions">
         <a
           id="contact-link"
           class="button"
@@ -218,6 +459,9 @@
           rel="noopener noreferrer"
         >
           Order on WhatsApp <span aria-hidden="true">↗</span>
+        </a>
+        <a id="share-link" class="button secondary" target="_blank" rel="noopener noreferrer">
+          Send to family on WhatsApp <span aria-hidden="true">↗</span>
         </a>
         <p id="contact-note"></p>
       </div>

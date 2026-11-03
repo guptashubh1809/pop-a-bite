@@ -9,6 +9,16 @@ window.POPABITE = {
   whatsappNumber: '917889484101', // Country code + number, digits only; for example 91 followed by 10 digits.
   deliveryInformation: '',
 
+  // Kitchen status shown under the opening headline. Set kitchenOpen to false when Maa is fully booked,
+  // and change kitchenStatus to something like 'Kitchen full this week. Back on 15 Nov'.
+  kitchenOpen: true,
+  kitchenStatus: 'Kitchen open · taking orders this week',
+
+  // Customer reviews. The section stays hidden until at least one is added.
+  // Only add real messages, with the customer's permission. Use first name and area only.
+  // Example: { quote: 'Tasted exactly like my nani’s.', name: 'Neha', place: 'Gandhi Nagar' }
+  reviews: [],
+
   products: [
     {
       id: 'ladoo-one',
@@ -33,13 +43,13 @@ window.POPABITE = {
         ['Trans fat', '<0.01 g'],
         ['Cholesterol', '<0.01 mg']
       ],
-      image: 'images/haldi-ladoo.png',
+      image: 'images/haldi-ladoo.jpg',
       paymentUrl: ''
     },
     {
       id: 'sund',
       name: 'Jammu Sund',
-      description: 'A Jammu winter speciality of dry fruits roasted in cow ghee.',
+      description: 'Jammu’s winter speciality: dry fruits, gond and dry ginger roasted in cow ghee.',
       priceLabel: '₹550',
       price: 550,
       packSize: '500 g',
@@ -48,7 +58,7 @@ window.POPABITE = {
       allergens: 'Contains nuts (almonds, cashews) and milk (ghee).',
       storage: 'Store at room temperature away from direct sunlight. Shelf life: 3 months.',
       nutrition: null, // No lab report yet for Sund.
-      image: 'images/sund.png',
+      image: 'images/sund.jpg',
       paymentUrl: ''
     },
     {
@@ -74,7 +84,7 @@ window.POPABITE = {
         ['Trans fat', '<0.01 g'],
         ['Cholesterol', '<0.01 mg']
       ],
-      image: 'images/sattu-ladoo.png',
+      image: 'images/sattu-ladoo.jpg',
       paymentUrl: ''
     }
   ]
