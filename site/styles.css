@@ -1524,3 +1524,8 @@ footer .brand img {
   color: var(--muted);
   margin: 10px 0 0;
 }
+
+#kitchen-status {
+  font-size: 13px;
+  font-weight: 600;
+}
