@@ -14,6 +14,10 @@ window.POPABITE = {
   kitchenOpen: true,
   kitchenStatus: 'Kitchen open · taking orders this week',
 
+  // Pickup: the area name only, for example 'Gandhi Nagar'. Never the full home address;
+  // the exact location is shared on WhatsApp after the order is confirmed.
+  pickupArea: '',
+
   // Customer reviews. The section stays hidden until at least one is added.
   // Only add real messages, with the customer's permission. Use first name and area only.
   // Example: { quote: 'Tasted exactly like my nani’s.', name: 'Neha', place: 'Gandhi Nagar' }

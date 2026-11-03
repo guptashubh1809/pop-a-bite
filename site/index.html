@@ -266,8 +266,27 @@
 
         <div id="order-items" class="order-items"></div>
 
-        <label class="order-area-label" for="order-area">Delivery area or PIN code (Jammu only)</label>
-        <input id="order-area" class="order-area" type="text" autocomplete="postal-code" placeholder="For example, Trikuta Nagar or 180012">
+        <fieldset class="order-choice">
+          <legend class="order-area-label">How would you like it?</legend>
+          <label><input type="radio" name="order-method" value="delivery" id="order-delivery" checked> Delivery in Jammu</label>
+          <label><input type="radio" name="order-method" value="pickup" id="order-pickup"> Pickup from our kitchen (free)</label>
+        </fieldset>
+
+        <div id="order-area-group">
+          <label class="order-area-label" for="order-area">Delivery area or PIN code (Jammu only)</label>
+          <input id="order-area" class="order-area" type="text" autocomplete="postal-code" placeholder="For example, Trikuta Nagar or 180012">
+        </div>
+        <!-- app.js fills this from pickupArea in config.js. Never put the home address on the site. -->
+        <p id="order-pickup-note" class="order-note" hidden></p>
+
+        <label class="order-gift">
+          <input type="checkbox" id="order-gift"> This is a gift
+        </label>
+        <div id="order-gift-group" hidden>
+          <label class="order-area-label" for="order-gift-message">Message for the card</label>
+          <input id="order-gift-message" class="order-area" type="text" maxlength="150" placeholder="Happy Lohri, Mummy-Papa! Love, Neha">
+          <p class="order-note">Maa writes it by hand on a card in the box. Sending to someone else? Share their name and address on WhatsApp.</p>
+        </div>
 
         <p id="order-summary" class="order-summary" aria-live="polite"></p>
         <a id="order-send" class="button" hidden>Send order on WhatsApp ↗</a>
@@ -415,6 +434,15 @@
           Delivery charges are additional to the listed product prices and
           depend on your location. We’ll let you know the exact delivery charge
           and total cost before you confirm your order.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I pick up my order?</summary>
+        <p>
+          Yes, pickup from our home kitchen in Jammu is free. Choose "Pickup" in the
+          order builder, and we'll send the exact location and a pickup time on
+          WhatsApp once your order is ready.
         </p>
       </details>
 

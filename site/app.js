@@ -16,6 +16,12 @@ const orderArea = document.querySelector('#order-area');
 const orderSummary = document.querySelector('#order-summary');
 const orderSend = document.querySelector('#order-send');
 const stickyOrder = document.querySelector('#sticky-order');
+const orderPickup = document.querySelector('#order-pickup');
+const orderAreaGroup = document.querySelector('#order-area-group');
+const orderPickupNote = document.querySelector('#order-pickup-note');
+const orderGift = document.querySelector('#order-gift');
+const orderGiftGroup = document.querySelector('#order-gift-group');
+const orderGiftMessage = document.querySelector('#order-gift-message');
 
 // Allow payment links only from supported Razorpay domains.
 function safePaymentUrl(value) {
@@ -221,16 +227,47 @@ function buildOrderMessage() {
   }
 
   const area = orderArea.value.trim();
+  const pickup = orderPickup.checked;
+  const giftMessage = orderGiftMessage.value.trim();
 
-  return [
+  const message = [
     "Hi Pop-A-Bite! I'd like to order:",
     ...lines,
-    `Product total: ${formatRupees(total)} (delivery charges extra)`,
-    area
-      ? `Delivery area or PIN code: ${area}`
-      : "I'll share my delivery location here.",
-    'Please confirm availability, delivery charge and the total.'
-  ].join('\n');
+    pickup
+      ? `Product total: ${formatRupees(total)}`
+      : `Product total: ${formatRupees(total)} (delivery charges extra)`,
+    pickup
+      ? "I'll pick it up from your kitchen. Please share the pickup location and time."
+      : area
+        ? `Delivery area or PIN code: ${area}`
+        : "I'll share my delivery location here."
+  ];
+
+  if (orderGift.checked) {
+    message.push(giftMessage ? `This is a gift. Message for the card: "${giftMessage}"` : 'This is a gift.');
+  }
+
+  message.push(
+    pickup
+      ? 'Please confirm availability and the total.'
+      : 'Please confirm availability, delivery charge and the total.'
+  );
+
+  return message.join('\n');
+}
+
+// Show the delivery area field or the pickup note, and the gift message field when needed.
+function updateOrderOptions() {
+  const pickup = orderPickup.checked;
+  const pickupArea = String(config.pickupArea || '').trim();
+
+  orderAreaGroup.hidden = pickup;
+  orderPickupNote.hidden = !pickup;
+  orderPickupNote.textContent = pickupArea
+    ? `Pickup from our home kitchen in ${pickupArea}. We'll send the exact location on WhatsApp after you order.`
+    : "Pickup from our home kitchen in Jammu. We'll send the exact location on WhatsApp after you order.";
+  orderGiftGroup.hidden = !orderGift.checked;
+  updateOrder();
 }
 
 function updateOrder() {
@@ -242,7 +279,9 @@ function updateOrder() {
       (sum, product) => sum + (quantities.get(product.id) || 0) * product.price,
       0
     );
-    orderSummary.textContent = `Product total ${formatRupees(total)}. Delivery charges are extra and we will confirm them before you pay.`;
+    orderSummary.textContent = orderPickup.checked
+      ? `Product total ${formatRupees(total)}. No delivery charge for pickup.`
+      : `Product total ${formatRupees(total)}. Delivery charges are extra and we will confirm them before you pay.`;
   } else {
     orderSummary.textContent = 'Choose at least one treat to build your order message.';
   }
@@ -302,7 +341,12 @@ config.products.forEach(product => {
 });
 
 orderArea.addEventListener('input', updateOrder);
-updateOrder();
+orderGiftMessage.addEventListener('input', updateOrder);
+document.querySelectorAll('[name="order-method"]').forEach(input => {
+  input.addEventListener('change', updateOrderOptions);
+});
+orderGift.addEventListener('change', updateOrderOptions);
+updateOrderOptions();
 
 // Close the product details window.
 document.querySelector('.close').addEventListener('click', () => {

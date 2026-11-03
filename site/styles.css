@@ -1482,3 +1482,45 @@ footer .brand img {
     padding: 10px 0 45px;
   }
 }
+
+/* Order builder: delivery or pickup, and gift note */
+.order-choice {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.order-choice legend {
+  padding: 0;
+}
+
+.order-choice label,
+.order-gift {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.order-choice input,
+.order-gift input {
+  accent-color: var(--ink);
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.order-gift {
+  margin-top: 22px;
+  font-weight: 600;
+}
+
+.order-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
